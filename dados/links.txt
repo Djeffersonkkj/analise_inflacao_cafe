@@ -1,0 +1,7 @@
+Links dos dados coletados 
+
+Dados dos salários minimos: https://previdenciarista.com/blog/tabela-historica-dos-salarios-minimos/
+
+IPCA: https://sidra.ibge.gov.br/tabela/7060
+
+Preços café: https://www.cepea.org.br/br/indicador/cafe.aspx

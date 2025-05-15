@@ -5,3 +5,13 @@ Dados dos salários minimos: https://previdenciarista.com/blog/tabela-historica-
 IPCA: https://sidra.ibge.gov.br/tabela/7060
 
 Preços café: https://www.cepea.org.br/br/indicador/cafe.aspx
+
+
+paleta de cores
+Elemento	Cor	Código HEX	Uso recomendado
+Azul nobre	#2C3E50	Azul escuro	Títulos, destaques, bordas
+Azul real suave	#2980B9 ou #4DA8DA	Azul médio	Linhas, detalhes secundários
+Bege claro	#FDF6E3	Fundo neutro	Plano de fundo dos slides
+Dourado discreto	#D4AF37 ou #F0C674	Detalhe ouro	Ícones, barras de destaque
+Branco gelo	#FAFAFA	Texto sobre azul	Contraste para textos legíveis
+

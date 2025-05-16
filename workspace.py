@@ -267,4 +267,25 @@ def grafico6():
     plt.legend()
     plt.tight_layout()
     plt.show()
-    
+
+#Gerando tabelas----------------------------------------------------------------------------
+
+df_arabica_Y = df_arabica_Y.select_dtypes(include='number').round(2)
+df_robusta_Y = df_robusta_Y.select_dtypes(include='number').round(2)
+df_arabica_Y['preco_kg'] = (df_arabica_Y['preco_reais'] / 60).round(2)
+df_robusta_Y['preco_kg'] = (df_robusta_Y['preco_reais'] / 60).round(2)
+df_arab_robus_Y = df_robusta_Y.merge(df_arabica_Y[['ano', 'preco_reais', 'preco_kg']], on='ano', how='left', suffixes=('_robusta', '_arabica'))
+#df_arab_robus_Y.to_excel('comparativo_preco_cafe_por_kg.xlsx', index=False)
+
+tb_sal_vs_cafe = pd.DataFrame({
+    'ano': [2020, 2021, 2022, 2023, 2024, 2025],
+    'Salario': [1045.00, 1100.00, 1212.00, 1320.00, 1412.00, 1518.00]
+})
+tb_sal_vs_cafe = tb_sal_vs_cafe.merge(df_robusta_Y[['ano', 'preco_kg']], on='ano', how='left').rename(columns={'preco_kg': 'preco_kg_robusta'})
+tb_sal_vs_cafe = tb_sal_vs_cafe.merge(df_arabica_Y[['ano', 'preco_kg']], on='ano', how='left').rename(columns={'preco_kg': 'preco_kg_arabica'})
+tb_sal_vs_cafe['kg_robusta_por_salario'] = (tb_sal_vs_cafe['Salario'] / tb_sal_vs_cafe['preco_kg_robusta']).round(2)
+tb_sal_vs_cafe['kg_arabica_por_salario'] = (tb_sal_vs_cafe['Salario'] / tb_sal_vs_cafe['preco_kg_arabica']).round(2)
+tb_sal_vs_cafe = tb_sal_vs_cafe[[
+    'ano', 'Salario', 'preco_kg_robusta', 'kg_robusta_por_salario', 'preco_kg_arabica', 'kg_arabica_por_salario'
+]]
+#tb_sal_vs_cafe.to_excel('tb_sal_vs_cafe_Y.xlsx', index=False)

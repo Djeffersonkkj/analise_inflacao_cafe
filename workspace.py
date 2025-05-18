@@ -53,14 +53,14 @@ df_IPCA_alimentacao = processar_IPCA(df_IPCA_alimentacao)
 
 
 #Buscando dados faltantes---------------------------------------------------------------
-"""
-print(df_robusta.isnull().sum()) #0 missing data
-print(df_arabica.isnull().sum()) #0 missing data
-print(df_salariomin.isnull().sum()) #0 missing data
-print(df_IPCA_cafemoido.isnull().sum()) #0 missing data
-print(df_IPCA_geral.isnull().sum()) #0 missing data
-print(df_IPCA_alimentacao.isnull().sum()) #0 missing data
-"""
+def dados_faltantes():
+    print('Robusta',df_robusta.isnull().sum()) #0 missing data
+    print('Arabica',df_arabica.isnull().sum()) #0 missing data
+    print('Salário Mínimo',df_salariomin.isnull().sum()) #0 missing data
+    print('IPCA Café Moido',df_IPCA_cafemoido.isnull().sum()) #0 missing data
+    print('IPCA Geral',df_IPCA_geral.isnull().sum()) #0 missing data
+    print('IPCA Alimentação',df_IPCA_alimentacao.isnull().sum()) #0 missing data
+
 #Criando diferentes escalas temporais-------------------------------------
 
 df_robusta['ano_mes'] = df_robusta['data'].dt.to_period('M')
@@ -100,8 +100,8 @@ df_IPCA_cafemoido_quadrimestre['fator'] = 1 + (df_IPCA_cafemoido_quadrimestre['S
 df_IPCA_cafe_acumulado = (
     df_IPCA_cafemoido_quadrimestre.groupby('ano')['fator']
     .prod()
-    .sub(1)         # subtrai 1 para voltar ao valor percentual
-    .mul(100)       # converte para porcentagem
+    .sub(1)         
+    .mul(100)
     .reset_index(name='IPCA_acumulado')
 )
 #Tratando dados para gráficos------------------------------------------------------------

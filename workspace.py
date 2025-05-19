@@ -289,3 +289,16 @@ tb_sal_vs_cafe = tb_sal_vs_cafe[[
     'ano', 'Salario', 'preco_kg_robusta', 'kg_robusta_por_salario', 'preco_kg_arabica', 'kg_arabica_por_salario'
 ]]
 #tb_sal_vs_cafe.to_excel('tb_sal_vs_cafe_Y.xlsx', index=False)
+
+df_IPCA_geralSP_Y.rename(columns={'IPCA_acumulado_%': 'IPCA_Geral'}, inplace=True)
+df_IPCA_alimentacaoSP_Y.rename(columns={'IPCA_acumulado_%': 'IPCA_Alimentacao'}, inplace=True)
+df_IPCA_cafemoidoSP_Y.rename(columns={'IPCA_acumulado_%': 'IPCA_Cafe_Moido'}, inplace=True)
+df_IPCA_anual = df_IPCA_geralSP_Y[['ano', 'IPCA_Geral']].merge(
+    df_IPCA_alimentacaoSP_Y[['ano', 'IPCA_Alimentacao']], on='ano', how='left'
+).merge(
+    df_IPCA_cafemoidoSP_Y[['ano', 'IPCA_Cafe_Moido']], on='ano', how='left'
+)
+df_IPCA_anual_formatado = df_IPCA_anual.copy()
+df_IPCA_anual_formatado.iloc[:, 1:] = df_IPCA_anual_formatado.iloc[:, 1:].applymap(lambda x: f"{x:.2f}")
+#print(df_IPCA_anual_formatado)
+#df_IPCA_anual_formatado.to_excel("tb_ipca_anual.xlsx", index=False)
